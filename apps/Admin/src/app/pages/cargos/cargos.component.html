@@ -1,67 +1,59 @@
-<div class="app-content-header">
+<app-blank pageTitle="Cargos">
+  <flexi-grid 
+  [data]="data()!" 
+  [dataBinding]="true" 
+  [loading]="loading()"
+  (onRefresh)="result.reload()"
+  [total]="total()!"
+  [showCaption]="true"
+  captionTitle="Cargo List"
+  [showCommandColumn]="true"
+  [commandColumnTemplate]="commandColumnTemplate"
+  (dataStateChange)="dataStateChange($event)"
+  [captionTemplate]="captionTemplate"
+  [showExportExcelBtn]="true"
+  [exportExcelButtonClick]="exportExcel.bind(this)"
+  fontSize="15px">
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6"><h3 class="mb-0">Cargos</h3></div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-end">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page" routerLink="/cargos">Cargos</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="app-content">
-
-
-      <flexi-grid 
-      [data]="data()!" 
-      [dataBinding]="true" 
-      [loading]="loading()"
-      (onRefresh)="result.reload()"
-      [total]="total()!"
-      [showCaption]="true"
-      captionTitle="Cargo List"
-      [showCommandColumn]="true"
-      [commandColumnTemplate]="commandColumnTemplate"
-      (dataStateChange)="dataStateChange($event)"
-      [captionTemplate]="captionTemplate">
-
-        
-        <ng-template #captionTemplate>
-            <flexi-button 
-            btnSize="small"
-            btnIcon="add"
-            btnColor="primary"
-            title="Add Cargo"
-            flexiTooltip/>
-        </ng-template>
-
-        <flexi-grid-column field="createAt" title="Create Date" filterType="date" format="dd MMM yyyy HH:mm:ss"></flexi-grid-column>
-        <flexi-grid-column field="senderFullName" title="Sender Name"></flexi-grid-column>
-        <flexi-grid-column field="receiverFullName" title="Receiver Name"></flexi-grid-column>
-        <flexi-grid-column field="deliveryAddressCity" title="Delivery City"></flexi-grid-column>
-        <flexi-grid-column field="deliveryAddressDistrict" title="Delivery District"></flexi-grid-column>
-        <flexi-grid-column field="cargoTypeName" title="Cargo Type"></flexi-grid-column>
-        <flexi-grid-column field="weight" title="Wight (kg)"></flexi-grid-column>
-        <flexi-grid-column field="cargoStatusName" title="Cargo Status"></flexi-grid-column>
-        <flexi-grid-column field="createUserName" title="Created User"></flexi-grid-column>
-        <flexi-grid-column field="updateAt" title="Update Date"></flexi-grid-column>
-        <flexi-grid-column field="updateUserName" title="Updated User"></flexi-grid-column>
     
-        
-        <ng-template #commandColumnTemplate let-item>
-            <flexi-button 
-            btnSize="x-small"
-            btnIcon="delete"
-            btnColor="danger"
-            title="Delete"
-            flexiTooltip/>
+    <ng-template #captionTemplate>
+        <flexi-button 
+        btnSize="small"
+        btnIcon="add"
+        btnColor="primary"
+        title="Add Cargo"
+        flexiTooltip
+        routerLink="/cargos/create"/>
+    </ng-template>
+
+    <flexi-grid-column field="createAt" title="Create Date" filterType="date" format="dd MMM yyyy HH:mm:ss"></flexi-grid-column>
+    <flexi-grid-column field="senderFullName" title="Sender Name"></flexi-grid-column>
+    <flexi-grid-column field="receiverFullName" title="Receiver Name"></flexi-grid-column>
+    <flexi-grid-column field="deliveryAddressCity" title="Delivery City"></flexi-grid-column>
+    <flexi-grid-column field="deliveryAddressDistrict" title="Delivery District"></flexi-grid-column>
+    <flexi-grid-column field="cargoTypeName" title="Cargo Type"></flexi-grid-column>
+    <flexi-grid-column field="weight" title="Wight (kg)"></flexi-grid-column> 
+    <flexi-grid-column field="cargoStatusName" title="Cargo Status" textAlign="center">
+        <ng-template flexiGridCellTemplate let-item>
+            <span class="alert" [ngClass]='getStatus(item.cargoStatusName)' style="padding: 5px; border-width: 1px; border-color: #ccc;"> {{item.cargoStatusName}} </span>
         </ng-template>
+    </flexi-grid-column>
+    <flexi-grid-column field="createUserName" title="Created User"></flexi-grid-column>
+    <flexi-grid-column field="updateAt" title="Update Date" filterType="date" format="dd MMM yyyy HH:mm:ss"></flexi-grid-column>
+    <flexi-grid-column field="updateUserName" title="Updated User"></flexi-grid-column>
+
     
-    </flexi-grid>
-  </div>
-  
+    <ng-template #commandColumnTemplate let-item>
+        <flexi-button 
+        btnSize="x-small"
+        btnIcon="delete"
+        btnColor="danger"
+        title="Delete"
+        flexiTooltip
+        (click) = "delete(item)"/>
+    </ng-template>
+
+</flexi-grid>
+</app-blank>
+
+ 

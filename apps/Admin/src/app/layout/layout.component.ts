@@ -1,9 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  inject,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { BreadcrumbService } from '../services/breadcrumb.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   imports: [RouterOutlet, RouterLink],
@@ -11,4 +16,16 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export default class LayoutComponent {}
+export default class LayoutComponent {
+  breadcrumb = computed(() => this.#breadcrumb.data());
+  time = signal<string>('');
+
+  #breadcrumb = inject(BreadcrumbService);
+  #date = inject(DatePipe);
+
+  constructor() {
+    setInterval(() => {
+      this.time.set(this.#date.transform(new Date(), 'dd.MM.yyyy HH:mm:ss')!);
+    }, 1000);
+  }
+}

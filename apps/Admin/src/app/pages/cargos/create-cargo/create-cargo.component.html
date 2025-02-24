@@ -1,0 +1,157 @@
+<app-blank pageTitle="Create Cargo">
+    <div class="card">
+        <div class="card-body">
+            <form #form="ngForm" autocomplete="off" formValidate (ngSubmit)="save(form)">
+                <flexi-stepper
+                [completeBtnText]="'Save'"
+                [loading]="loading()">
+                
+                    <!-- Sender -->
+                    <flexi-step flexiStepTitle="Sender Informations">
+                        <div class="row form-group">
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Identity Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().sender.identityNumber" name="senderIdentityNumber" required minlength="11" maxlength="11" autofocus>
+                                    <div class="invalid-feedback">Enter a valid identity Number</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().sender.firstName" name="senderFirstName" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid First Name</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().sender.lastName" name="senderLastName" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid Last Name</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().sender.email" name="senderEmail" >
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().sender.phoneNumber" name="senderPhone" required prefix="0" mask="(999) 999 9999">
+                                    <div class="invalid-feedback">Enter a valid Phone Number</div>
+                                </div>
+                            </div>
+                        </div>
+                    </flexi-step>
+            
+                    <!-- Receiver -->
+                    <flexi-step flexiStepTitle="Receiver Informations">
+                        <div class="row form-group">
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Identity Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().receiver.identityNumber" name="receiverIdentityNumber" required minlength="11" maxlength="11" autofocus>
+                                    <div class="invalid-feedback">Enter a valid identity Number</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().receiver.firstName" name="receiverFirstName" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid First Name</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().receiver.lastName" name="receiverLastName" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid Last Name</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().receiver.email" name="receiverEmail" >
+                                </div>
+                            </div>
+                            <div  class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().receiver.phoneNumber" name="receiverPhone" required prefix="0" mask="(999) 999 9999">
+                                    <div class="invalid-feedback">Enter a valid Phone Number</div>
+                                </div>
+                            </div>
+                        </div>
+                    </flexi-step>
+
+                    <!-- Delivery Address -->
+                    <flexi-step flexiStepTitle="Delivery Address">
+                        <div class="row form-group">
+                            <div class="col-md-3 col-12">
+                                <div class="form-group mt-2">
+                                    <label>City <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().deliveryAddress.city" name="deliveryCity" required autofocus>
+                                    <div class="invalid-feedback">Enter a valid City</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-12">
+                                <div class="form-group mt-2">
+                                    <label>District <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().deliveryAddress.district" name="deliveryDistrict" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid District</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-3 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Neighborhood <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().deliveryAddress.neighborhood" name="deliveryNeighborhood" required minlength="3">
+                                    <div class="invalid-feedback">Enter a valid Neighborhood</div>
+                                </div>
+                            </div>
+                            <div  class="col-md-3 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Street</label>
+                                    <input type="text" class="form-control" [(ngModel)]="data().deliveryAddress.street" name="deliveryStreet">
+                                </div>
+                            </div>
+                            <div  class="col-md-12 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Full Address <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" [(ngModel)]="data().deliveryAddress.fullAddress" name="deliveryFullAddress" required minlength="10" rows="10"></textarea>
+                                    <div class="invalid-feedback">Enter a valid Full Address</div>
+                                </div>
+                            </div>
+                        </div>
+                    </flexi-step>
+
+                    <!-- Cargo Information -->
+                    <flexi-step flexiStepTitle="Cargo Information">
+                        <div class="row form-group">
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Cargo Type <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="cargoInfoType" [(ngModel)]="data().cargoInfo.cargoTypeValue">
+                                        <option [value]="0">Package</option>
+                                        <option [value]="1">Envelope</option>
+                                        <option [value]="2">Box</option>
+                                    </select>
+                                    <div class="invalid-feedback">Select a Cargo Type</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group mt-2">
+                                    <label>Weight (kg)<span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" [(ngModel)]="data().cargoInfo.weight" name="cargoInfoWeight" required min="1">
+                                    <div class="invalid-feedback">Enter a valid Weight</div>
+                                </div>
+                            </div>
+                        </div>
+                    </flexi-step>
+                    
+            </flexi-stepper>
+            </form>
+        </div>
+    </div>
+</app-blank>
